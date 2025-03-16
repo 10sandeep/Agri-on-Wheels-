@@ -11,6 +11,8 @@ import {
   CheckCircle2,
   Home,
   FileText,
+  Menu,
+  X,
 } from "lucide-react";
 import Banner from "../src/assets/DS Banner.jpg";
 import DSLOGO from '../src/assets/DS logo.png'
@@ -18,6 +20,7 @@ import CUTMLOGO from '../src/assets/cutm logo.png'
 
 function App() {
   const [currentPage, setCurrentPage] = useState("home");
+  const [isMenuOpen, setIsMenuOpen] = useState(false); // State for mobile menu toggle
 
   const renderHome = () => (
     <>
@@ -211,25 +214,25 @@ function App() {
   return (
     <div className="min-h-screen bg-white">
       {/* Navigation */}
-      <nav className="bg-white shadow-sm">
+      <nav className="bg-white shadow-sm fixed w-full z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-4">
             {/* Logo Section */}
-            <div className="flex space-x-6">
+            <div className="flex space-x-4 items-center">
               <img
                 src={CUTMLOGO}
                 alt="Centurion University Logo"
-                className="h-10 w-auto"
+                className="h-8 w-auto sm:h-10"
               />
               <img
                 src={DSLOGO}
                 alt="Dassault Systèmes Logo"
-                className="h-10 w-auto"
+                className="h-8 w-auto sm:h-10"
               />
             </div>
 
-            {/* Navigation Buttons */}
-            <div className="flex space-x-8">
+            {/* Desktop Navigation Buttons */}
+            <div className="hidden md:flex space-x-8">
               <button
                 onClick={() => setCurrentPage("home")}
                 className={`flex items-center space-x-2 px-4 py-2 rounded-md ${
@@ -253,12 +256,59 @@ function App() {
                 <span>Project Details</span>
               </button>
             </div>
+
+            {/* Mobile Menu Button */}
+            <div className="md:hidden">
+              <button
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                className="p-2 text-gray-600 hover:text-green-600"
+                aria-label="Toggle menu"
+              >
+                {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              </button>
+            </div>
+          </div>
+
+          {/* Mobile Menu */}
+          <div className={`md:hidden ${isMenuOpen ? "block" : "hidden"} bg-white shadow-md`}>
+            <div className="px-4 pt-2 pb-4 space-y-2">
+              <button
+                onClick={() => {
+                  setCurrentPage("home");
+                  setIsMenuOpen(false);
+                }}
+                className={`flex items-center space-x-2 px-4 py-2 rounded-md w-full text-left ${
+                  currentPage === "home"
+                    ? "bg-green-50 text-green-600"
+                    : "text-gray-600 hover:text-green-600"
+                }`}
+              >
+                <Home className="w-5 h-5" />
+                <span>Home</span>
+              </button>
+              <button
+                onClick={() => {
+                  setCurrentPage("details");
+                  setIsMenuOpen(false);
+                }}
+                className={`flex items-center space-x-2 px-4 py-2 rounded-md w-full text-left ${
+                  currentPage === "details"
+                    ? "bg-green-50 text-green-600"
+                    : "text-gray-600 hover:text-green-600"
+                }`}
+              >
+                <FileText className="w-5 h-5" />
+                <span>Project Details</span>
+              </button>
+            </div>
           </div>
         </div>
       </nav>
 
       {/* Content */}
-      {currentPage === "home" ? renderHome() : renderProjectDetails()}
+      <div className="pt-16"> {/* Add padding-top to account for fixed navbar */}
+        {currentPage === "home" ? renderHome() : renderProjectDetails()}
+      </div>
 
       {/* Footer */}
       <footer className="bg-gray-900 text-white py-12">
