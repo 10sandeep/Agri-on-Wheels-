@@ -13,7 +13,7 @@ import {
   FileText,
 } from "lucide-react";
 import Banner from "../src/assets/DS Banner.jpg";
-import DSLOGO from '../src/assets/DS logo.jpg'
+import DSLOGO from '../src/assets/DS logo.png'
 import CUTMLOGO from '../src/assets/cutm logo.png'
 
 function App() {
