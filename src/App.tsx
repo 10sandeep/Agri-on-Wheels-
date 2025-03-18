@@ -15,8 +15,8 @@ import {
   X,
 } from "lucide-react";
 import Banner from "../src/assets/DS Banner.jpg";
-import DSLOGO from '../src/assets/DS logo.png'
-import CUTMLOGO from '../src/assets/cutm logo.png'
+import DSLOGO from "../src/assets/DS logo.png";
+import CUTMLOGO from "../src/assets/cutm logo.png";
 
 function App() {
   const [currentPage, setCurrentPage] = useState("home");
@@ -255,6 +255,15 @@ function App() {
                 <FileText className="w-5 h-5" />
                 <span>Project Details</span>
               </button>
+              <a
+                href="https://forms.gle/rzh58TrSvK8YiuDd8"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center space-x-2 px-4 py-2 rounded-md text-gray-600 hover:text-green-600"
+              >
+                <FileText className="w-5 h-5" />
+                <span>Project Progress</span>
+              </a>
             </div>
 
             {/* Mobile Menu Button */}
@@ -300,6 +309,16 @@ function App() {
                 <FileText className="w-5 h-5" />
                 <span>Project Details</span>
               </button>
+              <a
+                href="https://forms.gle/rzh58TrSvK8YiuDd8"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center space-x-2 px-4 py-2 rounded-md w-full text-left text-gray-600 hover:text-green-600"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                <FileText className="w-5 h-5" />
+                <span>Project Progress</span>
+              </a>
             </div>
           </div>
         </div>
