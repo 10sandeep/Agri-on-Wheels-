@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Tractor,
   Bone as Drone,
@@ -13,10 +13,81 @@ import {
   FileText,
   Menu,
   X,
+  Loader,
+  Wrench,
+  Clock,
 } from "lucide-react";
 import Banner from "../src/assets/DS Banner.jpg";
 import DSLOGO from "../src/assets/DS logo.png";
 import CUTMLOGO from "../src/assets/cutm logo.png";
+
+// UnderMaintenance Component
+const UnderMaintenance: React.FC = () => {
+  interface TimeLeft {
+    hours?: number;
+    minutes?: number;
+    seconds?: number;
+  }
+
+  const calculateTimeLeft = (): TimeLeft => {
+    const targetDate = new Date();
+    targetDate.setHours(targetDate.getHours() + 5); // 5 hours from now
+    const difference = targetDate - new Date();
+    let timeLeft: TimeLeft = {};
+
+    if (difference > 0) {
+      timeLeft = {
+        hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+        minutes: Math.floor((difference / 1000 / 60) % 60),
+        seconds: Math.floor((difference / 1000) % 60),
+      };
+    }
+    return timeLeft;
+  };
+
+  const [timeLeft, setTimeLeft] = useState<TimeLeft>(calculateTimeLeft());
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTimeLeft(calculateTimeLeft());
+    }, 1000);
+    return () => clearInterval(timer);
+  }, []);
+
+  return (
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-900 text-white text-center px-4 relative">
+      <div className="absolute inset-0 bg-gradient-to-r from-green-600 to-blue-500 opacity-20 animate-pulse"></div>
+      <div className="relative z-10 p-8 bg-gray-800 bg-opacity-80 rounded-xl shadow-xl max-w-lg">
+        <Wrench className="w-16 h-16 text-yellow-400 animate-spin mb-4" />
+        <h1 className="text-3xl font-bold mb-2">We’ll be Back Soon!</h1>
+        <p className="text-gray-300 mb-4">
+          Our site is currently under maintenance. We apologize for the
+          inconvenience and appreciate your patience.
+        </p>
+        {timeLeft.hours !== undefined && (
+          <div className="flex items-center justify-center space-x-4 text-xl font-semibold">
+            <div className="flex flex-col items-center">
+              <Clock className="w-6 h-6 text-yellow-400" />
+              <span>{timeLeft.hours}h</span>
+            </div>
+            <span>:</span>
+            <div className="flex flex-col items-center">
+              <Clock className="w-6 h-6 text-yellow-400" />
+              <span>{timeLeft.minutes}m</span>
+            </div>
+            <span>:</span>
+            <div className="flex flex-col items-center">
+              <Clock className="w-6 h-6 text-yellow-400" />
+              <span>{timeLeft.seconds}s</span>
+            </div>
+          </div>
+        )}
+        <p className="text-gray-400 text-sm mt-4">Estimated time remaining</p>
+      </div>
+      <Loader className="w-8 h-8 text-gray-300 animate-spin mt-6" />
+    </div>
+  );
+};
 
 function App() {
   const [currentPage, setCurrentPage] = useState("home");
@@ -255,15 +326,17 @@ function App() {
                 <FileText className="w-5 h-5" />
                 <span>Project Details</span>
               </button>
-              <a
-                href="https://forms.gle/rzh58TrSvK8YiuDd8"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center space-x-2 px-4 py-2 rounded-md text-gray-600 hover:text-green-600"
+              <button
+                onClick={() => setCurrentPage("progress")}
+                className={`flex items-center space-x-2 px-4 py-2 rounded-md ${
+                  currentPage === "progress"
+                    ? "bg-green-50 text-green-600"
+                    : "text-gray-600 hover:text-green-600"
+                }`}
               >
                 <FileText className="w-5 h-5" />
                 <span>Project Progress</span>
-              </a>
+              </button>
             </div>
 
             {/* Mobile Menu Button */}
@@ -309,24 +382,28 @@ function App() {
                 <FileText className="w-5 h-5" />
                 <span>Project Details</span>
               </button>
-              <a
-                href="https://forms.gle/rzh58TrSvK8YiuDd8"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center space-x-2 px-4 py-2 rounded-md w-full text-left text-gray-600 hover:text-green-600"
-                onClick={() => setIsMenuOpen(false)}
+              <button
+                onClick={() => {
+                  setCurrentPage("progress");
+                  setIsMenuOpen(false);
+                }}
+                className={`flex items-center space-x-2 px-4 py-2 rounded-md w-full text-left ${
+                  currentPage === "progress"
+                    ? "bg-green-50 text-green-600"
+                    : "text-gray-600 hover:text-green-600"
+                }`}
               >
                 <FileText className="w-5 h-5" />
                 <span>Project Progress</span>
-              </a>
+              </button>
             </div>
           </div>
         </div>
       </nav>
 
       {/* Content */}
-      <div className="pt-16"> {/* Add padding-top to account for fixed navbar */}
-        {currentPage === "home" ? renderHome() : renderProjectDetails()}
+      <div className="pt-16">
+        {currentPage === "home" ? renderHome() : currentPage === "details" ? renderProjectDetails() : <UnderMaintenance />}
       </div>
 
       {/* Footer */}
