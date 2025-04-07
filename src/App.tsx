@@ -37,7 +37,7 @@ const App: React.FC = () => {
             <Route path="/ProjectProgress/Licence" element={<Licence />} />
             <Route path="/ProjectProgress/ProofOfWork/FieldVisit" element={<FieldVisit />} />
             <Route path="/ProjectProgress/ProofOfWork/ProcessedOutput" element={<ProcessedOutput />} />
-            <Route path="/coming-soon" element={<ComingSoon />} />{" "}
+            {/* <Route path="/coming-soon" element={<ComingSoon />} />{" "} */}
             {/* Add the new route */}
             {/* Optionally, use as a catch-all for undefined routes */}
             {/* <Route path="*" element={<ComingSoon />} /> */}

@@ -31,7 +31,7 @@ const Navbar: React.FC = () => {
           </NavLink>
           <div className="relative group">
             <NavLink
-              to="/ProjectProgress"
+              to=""
               className="flex items-center space-x-2 hover:text-green-700"
             >
               <span>Project Progress</span>
@@ -95,10 +95,7 @@ const Navbar: React.FC = () => {
           >
             Project Details
           </NavLink>
-          <NavLink
-            to="/ProjectProgress"
-            className="block py-3 text-lg hover:text-green-700"
-          >
+          <NavLink to="" className="block py-3 text-lg hover:text-green-700">
             Project Progress
           </NavLink>
           <button
