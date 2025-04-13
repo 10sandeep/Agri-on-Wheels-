@@ -20,7 +20,7 @@ const Hero: React.FC = () => {
             Agri on Wheels
           </h1>
           <p className="text-xl text-white max-w-3xl mx-auto">
-            Empowering 500+ farmers with cutting-edge agricultural technology,
+            Empowering farmers with cutting-edge agricultural technology,
             immersive VR training, and precision farming techniques.
           </p>
         </div>
