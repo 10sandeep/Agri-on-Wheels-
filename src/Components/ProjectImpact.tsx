@@ -13,12 +13,12 @@ const ProjectImpact: React.FC = () => {
   const metrics: Metric[] = [
     {
       icon: <Users className="w-8 h-8" />,
-      value: "500+",
+      value: "20",
       label: "Farmers Trained",
     },
     {
       icon: <MapPin className="w-8 h-8" />,
-      value: "6",
+      value: "1",
       label: "Month Program",
     },
     {
