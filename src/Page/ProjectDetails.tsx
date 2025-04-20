@@ -37,7 +37,7 @@ const ProjectDetails: React.FC = () => {
               <h2 className="text-xl font-semibold text-green-700 mb-3 tracking-wide">
                 Funding Released in FY 24-25
               </h2>
-              <p className="text-gray-600">₹ 1,50,000</p>
+              <p className="text-gray-600">₹ 11,50,000</p>
             </div>
           </div>
         </div>
