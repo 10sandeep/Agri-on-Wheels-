@@ -6,6 +6,7 @@ import DSLOGO from "../assets/Home Page Assets/DS logo.png";
 
 const Navbar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isProjectProgressOpen, setIsProjectProgressOpen] = useState(false);
   const [isProofOfWorkOpen, setIsProofOfWorkOpen] = useState(false);
 
   return (
@@ -95,34 +96,59 @@ const Navbar: React.FC = () => {
           >
             Project Details
           </NavLink>
-          <NavLink to="" className="block py-3 text-lg hover:text-green-700">
-            Project Progress
-          </NavLink>
+          
+          {/* Project Progress dropdown for mobile */}
           <button
-            onClick={() => setIsProofOfWorkOpen(!isProofOfWorkOpen)}
-            className="w-full text-left py-3 flex justify-between items-center hover:text-green-700"
+            onClick={() => setIsProjectProgressOpen(!isProjectProgressOpen)}
+            className="w-full text-left py-3 text-lg flex justify-between items-center hover:text-green-700"
           >
-            Proof of Work{" "}
+            Project Progress{" "}
             <ChevronDown
               className={`h-5 w-5 transition-transform ${
-                isProofOfWorkOpen ? "rotate-180" : ""
+                isProjectProgressOpen ? "rotate-180" : ""
               }`}
             />
           </button>
-          {isProofOfWorkOpen && (
+          
+          {isProjectProgressOpen && (
             <div className="pl-6">
+              {/* License link - This was missing in mobile view */}
               <NavLink
-                to="/ProjectProgress/ProofOfWork/FieldVisit"
+                to="/ProjectProgress/Licence"
                 className="block py-2 hover:text-green-700"
               >
-                Field Visit
+                License
               </NavLink>
-              <NavLink
-                to="/ProjectProgress/ProofOfWork/ProcessedOutput"
-                className="block py-2 hover:text-green-700"
+              
+              {/* Proof of Work section */}
+              <button
+                onClick={() => setIsProofOfWorkOpen(!isProofOfWorkOpen)}
+                className="w-full text-left py-2 flex justify-between items-center hover:text-green-700"
               >
-                Processed Output
-              </NavLink>
+                Proof of Work{" "}
+                <ChevronDown
+                  className={`h-5 w-5 transition-transform ${
+                    isProofOfWorkOpen ? "rotate-180" : ""
+                  }`}
+                />
+              </button>
+              
+              {isProofOfWorkOpen && (
+                <div className="pl-4">
+                  <NavLink
+                    to="/ProjectProgress/ProofOfWork/FieldVisit"
+                    className="block py-2 hover:text-green-700"
+                  >
+                    Field Visit
+                  </NavLink>
+                  <NavLink
+                    to="/ProjectProgress/ProofOfWork/ProcessedOutput"
+                    className="block py-2 hover:text-green-700"
+                  >
+                    Processed Output
+                  </NavLink>
+                </div>
+              )}
             </div>
           )}
         </div>
