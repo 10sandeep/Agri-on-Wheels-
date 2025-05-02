@@ -122,6 +122,12 @@ const FieldVisit: React.FC = () => {
       day: "Monday",
     },
     {
+      type: "photo",
+      url: IMAGE16,
+      date: "2025-03-17",
+      day: "Monday",
+    },
+    {
       type: "video",
       url: VIDEO10,
       date: "2025-03-17",

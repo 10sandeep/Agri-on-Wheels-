@@ -7,12 +7,11 @@ import MobileOutreachUnit from "../src/Components/MobileOutreachUnit";
 import ProjectImpact from "../src/Components/ProjectImpact";
 import Footer from "../src/Components/Footer";
 import ProjectDetails from "../src/Page/ProjectDetails";
-
 import Licence from "../src/Page/License";
-
 import FieldVisit from "../src/Page/FieldVisit";
 import ProcessedOutput from "../src/Page/ProcessedOutput";
 import ComingSoon from "../src/Page/ComingSoon"; // Import the new component
+import FarmerPDFViewer from "./Page/FarmerReview";
 
 const App: React.FC = () => {
   return (
@@ -35,8 +34,18 @@ const App: React.FC = () => {
             />
             <Route path="/ProjectDetails" element={<ProjectDetails />} />
             <Route path="/ProjectProgress/Licence" element={<Licence />} />
-            <Route path="/ProjectProgress/ProofOfWork/FieldVisit" element={<FieldVisit />} />
-            <Route path="/ProjectProgress/ProofOfWork/ProcessedOutput" element={<ProcessedOutput />} />
+            <Route
+              path="/ProjectProgress/ProofOfWork/FieldVisit"
+              element={<FieldVisit />}
+            />
+            <Route
+              path="/ProjectProgress/ProofOfWork/ProcessedOutput"
+              element={<ProcessedOutput />}
+            />
+                <Route
+              path="/ProjectProgress/ProofOfWork/FarmerReview"
+              element={<FarmerPDFViewer />}
+            />
             {/* <Route path="/coming-soon" element={<ComingSoon />} />{" "} */}
             {/* Add the new route */}
             {/* Optionally, use as a catch-all for undefined routes */}

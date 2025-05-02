@@ -63,6 +63,12 @@ const Navbar: React.FC = () => {
                   >
                     Processed Output
                   </NavLink>
+                  <NavLink
+                    to="/ProjectProgress/ProofOfWork/FarmerReview"
+                    className="block px-6 py-3 hover:bg-green-100"
+                  >
+                    Farmers Trained
+                  </NavLink>
                 </div>
               </div>
             </div>
@@ -143,6 +149,12 @@ const Navbar: React.FC = () => {
                   </NavLink>
                   <NavLink
                     to="/ProjectProgress/ProofOfWork/ProcessedOutput"
+                    className="block py-2 hover:text-green-700"
+                  >
+                    Processed Output
+                  </NavLink>
+                  <NavLink
+                    to="/ProjectProgress/ProofOfWork/FarmerReview"
                     className="block py-2 hover:text-green-700"
                   >
                     Processed Output
