@@ -1,266 +1,52 @@
-import { useState, useEffect } from 'react';
-import { Search, FileText, ChevronLeft, ChevronRight, Calendar, CheckCircle, Download, User, MapPin, Briefcase } from 'lucide-react';
-import { farmerData, Farmer } from '../data/Mockfarmer';
-
-// Farmer interface
-// interface Farmer {
-//   id: string;
-//   farmerName: string;
-//   block: string;
-//   gramPanchayat: string;
-//   village: string;
-//   experience: string;
-//   issueDate: string;
-//   documentNumber: string;
-//   pdfUrl: string;
-// }
+import { useState, useEffect } from "react";
+import {
+  Search,
+  FileText,
+  ChevronLeft,
+  ChevronRight,
+  Calendar,
+  CheckCircle,
+  Download,
+  User,
+  MapPin,
+  Briefcase,
+} from "lucide-react";
+import { farmerData, Farmer } from "../data/Mockfarmer";
 
 // Function to flatten the nested farmer data structure
-const flattenFarmerData = (nestedData) => {
+const flattenFarmerData = (nestedData: any): Farmer[] => {
   const flattenedArray: Farmer[] = [];
-  
-  // Iterate through blocks
-  Object.keys(nestedData).forEach(block => {
-    // Iterate through gram panchayats
-    Object.keys(nestedData[block]).forEach(gramPanchayat => {
-      // Add all farmers from this gram panchayat to our array
-      nestedData[block][gramPanchayat].forEach(farmer => {
+  Object.keys(nestedData).forEach((block) => {
+    Object.keys(nestedData[block]).forEach((gramPanchayat) => {
+      nestedData[block][gramPanchayat].forEach((farmer: Farmer) => {
         flattenedArray.push(farmer);
       });
     });
   });
-  
   return flattenedArray;
 };
 
 export default function FarmerReview() {
-  // Import nested farmer data structure from your mock data
-//   const farmerData = {
-//     // PARALAKHEMUNDI BLOCK
-//     "Paralakhemundi": {
-//       // Jiranga GP
-//       "Jiranga": [
-//         {
-//           id: "farmer-001",
-//           farmerName: "Rajesh Pradhan",
-//           block: "Paralakhemundi",
-//           gramPanchayat: "Jiranga",
-//           village: "Jiranga",
-//           experience: "5-10 years",
-//           issueDate: "2024-03-15",
-//           documentNumber: "ODI-GAJ-2024-10001",
-//           pdfUrl: "/farmers/Paralakhemundi/Jiranga/farmer-001-Rajesh_Pradhan.pdf"
-//         },
-//         {
-//           id: "farmer-002",
-//           farmerName: "Suresh Behera",
-//           block: "Paralakhemundi",
-//           gramPanchayat: "Jiranga",
-//           village: "Karadasing",
-//           experience: "3-5 years",
-//           issueDate: "2024-04-22",
-//           documentNumber: "ODI-GAJ-2024-10002",
-//           pdfUrl: "/farmers/Paralakhemundi/Jiranga/farmer-002-Suresh_Behera.pdf"
-//         }
-//       ],
-//       // Narayanpur GP
-//       "Narayanpur": [
-//         {
-//           id: "farmer-003",
-//           farmerName: "Bhabani Mahapatra",
-//           block: "Paralakhemundi",
-//           gramPanchayat: "Narayanpur",
-//           village: "Narayanpur",
-//           experience: "10+ years",
-//           issueDate: "2024-01-10",
-//           documentNumber: "ODI-GAJ-2024-10003",
-//           pdfUrl: "/farmers/Paralakhemundi/Narayanpur/farmer-003-Bhabani_Mahapatra.pdf"
-//         },
-//         {
-//           id: "farmer-004",
-//           farmerName: "Devraj Jena",
-//           block: "Paralakhemundi",
-//           gramPanchayat: "Narayanpur",
-//           village: "Chikatiguda",
-//           experience: "1-3 years",
-//           issueDate: "2024-02-18",
-//           documentNumber: "ODI-GAJ-2024-10004",
-//           pdfUrl: "/farmers/Paralakhemundi/Narayanpur/farmer-004-Devraj_Jena.pdf"
-//         }
-//       ],
-//       "Kashinagar": [
-//         {
-//           id: "farmer-005",
-//           farmerName: "Manoj Sahoo",
-//           block: "Paralakhemundi",
-//           gramPanchayat: "Kashinagar",
-//           village: "Kashinagar",
-//           experience: "5-10 years",
-//           issueDate: "2024-05-07",
-//           documentNumber: "ODI-GAJ-2024-10005",
-//           pdfUrl: "/farmers/Paralakhemundi/Kashinagar/farmer-005-Manoj_Sahoo.pdf"
-//         },
-//         {
-//           id: "farmer-006",
-//           farmerName: "Ramesh Patra",
-//           block: "Paralakhemundi",
-//           gramPanchayat: "Kashinagar",
-//           village: "Gurandi",
-//           experience: "3-5 years",
-//           issueDate: "2024-04-12",
-//           documentNumber: "ODI-GAJ-2024-10006",
-//           pdfUrl: "/farmers/Paralakhemundi/Kashinagar/farmer-006-Ramesh_Patra.pdf"
-//         }
-//       ],
-//       "Parabadi": [
-//         {
-//           id: "farmer-007",
-//           farmerName: "Prakash Mohanty",
-//           block: "Paralakhemundi",
-//           gramPanchayat: "Parabadi",
-//           village: "Parabadi",
-//           experience: "10+ years",
-//           issueDate: "2024-06-20",
-//           documentNumber: "ODI-GAJ-2024-10007",
-//           pdfUrl: "/farmers/Paralakhemundi/Parabadi/farmer-007-Prakash_Mohanty.pdf"
-//         },
-//         {
-//           id: "farmer-008",
-//           farmerName: "Deepak Majhi",
-//           block: "Paralakhemundi",
-//           gramPanchayat: "Parabadi",
-//           village: "Nalaghat",
-//           experience: "1-3 years",
-//           issueDate: "2024-03-05",
-//           documentNumber: "ODI-GAJ-2024-10008",
-//           pdfUrl: "/farmers/Paralakhemundi/Parabadi/farmer-008-Deepak_Majhi.pdf"
-//         }
-//       ],
-//       "Gurandi": [
-//         {
-//           id: "farmer-009",
-//           farmerName: "Narayan Nayak",
-//           block: "Paralakhemundi",
-//           gramPanchayat: "Gurandi",
-//           village: "Gurandi",
-//           experience: "5-10 years",
-//           issueDate: "2024-02-28",
-//           documentNumber: "ODI-GAJ-2024-10009",
-//           pdfUrl: "/farmers/Paralakhemundi/Gurandi/farmer-009-Narayan_Nayak.pdf"
-//         },
-//         {
-//           id: "farmer-010",
-//           farmerName: "Binod Sabar",
-//           block: "Paralakhemundi",
-//           gramPanchayat: "Gurandi",
-//           village: "Badagam",
-//           experience: "3-5 years",
-//           issueDate: "2024-01-15",
-//           documentNumber: "ODI-GAJ-2024-10010",
-//           pdfUrl: "/farmers/Paralakhemundi/Gurandi/farmer-010-Binod_Sabar.pdf"
-//         }
-//       ]
-//     },
-//     "Gumma": {
-//       "Alluri": [
-//         {
-//           id: "farmer-011",
-//           farmerName: "Jagdish Panigrahi",
-//           block: "Gumma",
-//           gramPanchayat: "Alluri",
-//           village: "Alluri",
-//           experience: "10+ years",
-//           issueDate: "2024-03-18",
-//           documentNumber: "ODI-GAJ-2024-10011",
-//           pdfUrl: "/farmers/Gumma/Alluri/farmer-011-Jagdish_Panigrahi.pdf"
-//         },
-//         {
-//           id: "farmer-012",
-//           farmerName: "Vinod Behera",
-//           block: "Gumma",
-//           gramPanchayat: "Alluri",
-//           village: "Kainpur",
-//           experience: "1-3 years",
-//           issueDate: "2024-05-10",
-//           documentNumber: "ODI-GAJ-2024-10012",
-//           pdfUrl: "/farmers/Gumma/Alluri/farmer-012-Vinod_Behera.pdf"
-//         }
-//       ],
-//       "Chandiput": [
-//         {
-//           id: "farmer-013",
-//           farmerName: "Pramod Swain",
-//           block: "Gumma",
-//           gramPanchayat: "Chandiput",
-//           village: "Chandiput",
-//           experience: "5-10 years",
-//           issueDate: "2024-04-25",
-//           documentNumber: "ODI-GAJ-2024-10013",
-//           pdfUrl: "/farmers/Gumma/Chandiput/farmer-013-Pramod_Swain.pdf"
-//         },
-//         {
-//           id: "farmer-014",
-//           farmerName: "Chittaranjan Sahu",
-//           block: "Gumma",
-//           gramPanchayat: "Chandiput",
-//           village: "Hadubhangi",
-//           experience: "3-5 years",
-//           issueDate: "2024-02-19",
-//           documentNumber: "ODI-GAJ-2024-10014",
-//           pdfUrl: "/farmers/Gumma/Chandiput/farmer-014-Chittaranjan_Sahu.pdf"
-//         }
-//       ]
-//     },
-//     "Mohana": {
-//       "Laxmipur": [
-//         {
-//           id: "farmer-021",
-//           farmerName: "Santosh Sahoo",
-//           block: "Mohana",
-//           gramPanchayat: "Laxmipur",
-//           village: "Laxmipur",
-//           experience: "5-10 years",
-//           issueDate: "2024-03-12",
-//           documentNumber: "ODI-GAJ-2024-10021",
-//           pdfUrl: "/farmers/Mohana/Laxmipur/farmer-021-Santosh_Sahoo.pdf"
-//         },
-//         {
-//           id: "farmer-022",
-//           farmerName: "Hitesh Jena",
-//           block: "Mohana",
-//           gramPanchayat: "Laxmipur",
-//           village: "Haripur",
-//           experience: "3-5 years",
-//           issueDate: "2024-06-18",
-//           documentNumber: "ODI-GAJ-2024-10022",
-//           pdfUrl: "/farmers/Mohana/Laxmipur/farmer-022-Hitesh_Jena.pdf"
-//         }
-//       ]
-//     }
-//   };
-
-  // Flatten the nested data structure to an array of farmers
   const allFarmers = flattenFarmerData(farmerData);
-  
+
   const [farmers] = useState<Farmer[]>(allFarmers);
   const [filteredFarmers, setFilteredFarmers] = useState<Farmer[]>(allFarmers);
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedFarmer, setSelectedFarmer] = useState<Farmer | null>(null);
   const [loading, setLoading] = useState(false);
-  const [activeBlock, setActiveBlock] = useState<string>('all');
-  
+  const [activeBlock, setActiveBlock] = useState<string>("all");
+
   const farmersPerPage = 10;
   const totalPages = Math.ceil(filteredFarmers.length / farmersPerPage);
-  
-  // Get unique blocks for filter options
-  const blocks = ['all', ...Array.from(new Set(farmers.map(farmer => farmer.block)))];
-  
+
+  const blocks = ["all", ...Array.from(new Set(farmers.map((farmer) => farmer.block)))];
+
   useEffect(() => {
-    const results = farmers.filter(farmer => {
-      const matchesBlock = activeBlock === 'all' || farmer.block === activeBlock;
-      const matchesSearch = 
-        farmer.farmerName.toLowerCase().includes(searchTerm.toLowerCase()) || 
+    const results = farmers.filter((farmer) => {
+      const matchesBlock = activeBlock === "all" || farmer.block === activeBlock;
+      const matchesSearch =
+        farmer.farmerName.toLowerCase().includes(searchTerm.toLowerCase()) ||
         farmer.village.toLowerCase().includes(searchTerm.toLowerCase()) ||
         farmer.gramPanchayat.toLowerCase().includes(searchTerm.toLowerCase());
       return matchesBlock && matchesSearch;
@@ -268,38 +54,45 @@ export default function FarmerReview() {
     setFilteredFarmers(results);
     setCurrentPage(1);
   }, [searchTerm, farmers, activeBlock]);
-  
+
   const indexOfLastFarmer = currentPage * farmersPerPage;
   const indexOfFirstFarmer = indexOfLastFarmer - farmersPerPage;
   const currentFarmers = filteredFarmers.slice(indexOfFirstFarmer, indexOfLastFarmer);
-  
-  const handlePageChange = (newPage) => {
+
+  const handlePageChange = (newPage: number) => {
     if (newPage > 0 && newPage <= totalPages) {
       setCurrentPage(newPage);
     }
   };
-  
-  const handleSelectFarmer = (farmer) => {
+
+  const handleSelectFarmer = (farmer: Farmer) => {
     setLoading(true);
     setSelectedFarmer(farmer);
-    // Simulate loading
     setTimeout(() => setLoading(false), 800);
   };
-  
+
   const formatDate = (dateStr: string): string => {
     const date = new Date(dateStr);
-    return date.toLocaleDateString('en-IN', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
+    return date.toLocaleDateString("en-IN", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
     });
   };
 
+  // Updated handleDownload function to trigger PDF download
   const handleDownload = (farmer: Farmer) => {
     if (farmer.pdfUrl) {
+      // Create a temporary anchor element to trigger the download
+      const link = document.createElement("a");
+      link.href = farmer.pdfUrl; // Use the pdfUrl directly
+      link.download = `${farmer.farmerName}-certificate.pdf`; // Suggest a filename for the download
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link); // Clean up
       alert(`Downloading Farmer Information for ${farmer.farmerName}`);
-      // In a real app, this would trigger a download
-      console.log(`Download initiated for ${farmer.pdfUrl}`);
+    } else {
+      alert("PDF URL is not available for this farmer.");
     }
   };
 
@@ -309,10 +102,10 @@ export default function FarmerReview() {
         <h1 className="text-2xl font-bold">Agri on Wheels - Farmer Directory</h1>
         <p className="text-green-100">Registered farmers information portal</p>
       </div>
-      
+
       {selectedFarmer ? (
         <div className="p-4 md:p-6 mx-auto w-full max-w-4xl bg-white rounded-lg shadow-md mt-4">
-          <button 
+          <button
             onClick={() => setSelectedFarmer(null)}
             className="flex items-center text-green-700 font-medium mb-4 hover:underline"
           >
@@ -326,7 +119,7 @@ export default function FarmerReview() {
                 <h1 className="text-2xl font-bold text-gray-800">{selectedFarmer.farmerName}</h1>
                 <div className="text-gray-500 text-sm mt-1">Document ID: {selectedFarmer.documentNumber}</div>
               </div>
-              <button 
+              <button
                 className="bg-green-600 hover:bg-green-700 text-white font-medium px-3 py-2 rounded flex items-center text-sm w-full sm:w-auto justify-center"
                 onClick={() => handleDownload(selectedFarmer)}
               >
@@ -359,7 +152,7 @@ export default function FarmerReview() {
                   </div>
                 </div>
               </div>
-              
+
               <div className="bg-gray-50 p-4 rounded-lg">
                 <div className="flex items-center mb-3">
                   <Briefcase size={20} className="text-green-600 mr-2" />
@@ -381,7 +174,7 @@ export default function FarmerReview() {
                 </div>
               </div>
             </div>
-            
+
             <div>
               <h3 className="text-lg font-semibold text-gray-700 mb-4">Location Information</h3>
               <div className="bg-gray-50 p-4 rounded-lg">
@@ -404,11 +197,13 @@ export default function FarmerReview() {
                   </div>
                 </div>
               </div>
-              
+
               <div className="mt-4 p-4 bg-green-50 border border-green-100 rounded-lg">
                 <div className="flex items-center">
                   <CheckCircle size={20} className="text-green-600 mr-2" />
-                  <span className="text-green-800 font-medium">Active Participant in Agri on Wheels Program</span>
+                  <span className="text-green-800 font-medium">
+                    Active Participant in Agri on Wheels Program
+                  </span>
                 </div>
               </div>
             </div>
@@ -420,27 +215,33 @@ export default function FarmerReview() {
             <div className="flex flex-col mb-4">
               {/* Block selection - Scrollable on mobile */}
               <div className="flex overflow-x-auto pb-2 mb-4 no-scrollbar">
-                <button 
-                  onClick={() => setActiveBlock('all')} 
+                <button
+                  onClick={() => setActiveBlock("all")}
                   className={`px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap mr-2 ${
-                    activeBlock === 'all' ? 'bg-green-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    activeBlock === "all"
+                      ? "bg-green-600 text-white"
+                      : "bg-gray-100 text-gray-700 hover:bg-gray-200"
                   }`}
                 >
                   All Blocks
                 </button>
-                {blocks.filter(block => block !== 'all').map(block => (
-                  <button 
-                    key={block}
-                    onClick={() => setActiveBlock(block)} 
-                    className={`px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap mr-2 ${
-                      activeBlock === block ? 'bg-green-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                    }`}
-                  >
-                    {block}
-                  </button>
-                ))}
+                {blocks
+                  .filter((block) => block !== "all")
+                  .map((block) => (
+                    <button
+                      key={block}
+                      onClick={() => setActiveBlock(block)}
+                      className={`px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap mr-2 ${
+                        activeBlock === block
+                          ? "bg-green-600 text-white"
+                          : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                      }`}
+                    >
+                      {block}
+                    </button>
+                  ))}
               </div>
-              
+
               {/* Search bar */}
               <div className="relative w-full">
                 <input
@@ -456,7 +257,7 @@ export default function FarmerReview() {
 
             <div className="space-y-3">
               {currentFarmers.length > 0 ? (
-                currentFarmers.map(farmer => (
+                currentFarmers.map((farmer) => (
                   <button
                     key={farmer.id}
                     onClick={() => handleSelectFarmer(farmer)}
@@ -495,27 +296,31 @@ export default function FarmerReview() {
                 </div>
               )}
             </div>
-            
+
             {/* Pagination */}
             {currentFarmers.length > 0 && (
               <div className="mt-4 flex items-center justify-between">
-                <button 
+                <button
                   onClick={() => handlePageChange(currentPage - 1)}
                   disabled={currentPage === 1}
-                  className={`p-2 rounded-full hover:bg-gray-200 ${currentPage === 1 ? 'text-gray-400 cursor-not-allowed' : 'text-gray-700'}`}
+                  className={`p-2 rounded-full hover:bg-gray-200 ${
+                    currentPage === 1 ? "text-gray-400 cursor-not-allowed" : "text-gray-700"
+                  }`}
                 >
                   <ChevronLeft size={20} />
                 </button>
-                
+
                 <div className="text-sm text-gray-700">
-                  Page {currentPage} of {totalPages} 
+                  Page {currentPage} of {totalPages}
                   <span className="ml-1 text-gray-500">({filteredFarmers.length} farmers)</span>
                 </div>
-                
-                <button 
+
+                <button
                   onClick={() => handlePageChange(currentPage + 1)}
                   disabled={currentPage === totalPages}
-                  className={`p-2 rounded-full hover:bg-gray-200 ${currentPage === totalPages ? 'text-gray-400 cursor-not-allowed' : 'text-gray-700'}`}
+                  className={`p-2 rounded-full hover:bg-gray-200 ${
+                    currentPage === totalPages ? "text-gray-400 cursor-not-allowed" : "text-gray-700"
+                  }`}
                 >
                   <ChevronRight size={20} />
                 </button>
@@ -524,7 +329,7 @@ export default function FarmerReview() {
           </div>
         </div>
       )}
-      
+
       {/* Loading overlay */}
       {loading && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
@@ -534,7 +339,7 @@ export default function FarmerReview() {
           </div>
         </div>
       )}
-      
+
       {/* Scrollbar styles */}
       <style jsx global>{`
         .no-scrollbar::-webkit-scrollbar {
