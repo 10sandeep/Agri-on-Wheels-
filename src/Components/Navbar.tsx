@@ -157,7 +157,7 @@ const Navbar: React.FC = () => {
                     to="/ProjectProgress/ProofOfWork/FarmerReview"
                     className="block py-2 hover:text-green-700"
                   >
-                    Processed Output
+                   Farmer Trained
                   </NavLink>
                 </div>
               )}
