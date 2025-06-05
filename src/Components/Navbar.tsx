@@ -9,6 +9,8 @@ const Navbar: React.FC = () => {
   const [isProjectProgressOpen, setIsProjectProgressOpen] = useState(false);
   const [isProofOfWorkOpen, setIsProofOfWorkOpen] = useState(false);
 
+  const closeMenu = () => setIsMenuOpen(false);
+
   return (
     <nav className="fixed top-0 w-full bg-white shadow-lg z-50">
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10 flex items-center justify-between h-20">
@@ -93,12 +95,13 @@ const Navbar: React.FC = () => {
       {/* Mobile Menu */}
       {isMenuOpen && (
         <div className="md:hidden bg-white shadow-lg rounded-b-xl p-4">
-          <NavLink to="/" className="block py-3 text-lg hover:text-green-700">
+          <NavLink to="/" className="block py-3 text-lg hover:text-green-700" onClick={closeMenu}>
             Home
           </NavLink>
           <NavLink
             to="/ProjectDetails"
             className="block py-3 text-lg hover:text-green-700"
+            onClick={closeMenu}
           >
             Project Details
           </NavLink>
@@ -118,10 +121,11 @@ const Navbar: React.FC = () => {
           
           {isProjectProgressOpen && (
             <div className="pl-6">
-              {/* License link - This was missing in mobile view */}
+              {/* License link */}
               <NavLink
                 to="/ProjectProgress/Licence"
                 className="block py-2 hover:text-green-700"
+                onClick={closeMenu}
               >
                 License
               </NavLink>
@@ -144,20 +148,23 @@ const Navbar: React.FC = () => {
                   <NavLink
                     to="/ProjectProgress/ProofOfWork/FieldVisit"
                     className="block py-2 hover:text-green-700"
+                    onClick={closeMenu}
                   >
                     Field Visit
                   </NavLink>
                   <NavLink
                     to="/ProjectProgress/ProofOfWork/ProcessedOutput"
                     className="block py-2 hover:text-green-700"
+                    onClick={closeMenu}
                   >
                     Processed Output
                   </NavLink>
                   <NavLink
                     to="/ProjectProgress/ProofOfWork/FarmerReview"
                     className="block py-2 hover:text-green-700"
+                    onClick={closeMenu}
                   >
-                   Farmer Trained
+                    Farmer Trained
                   </NavLink>
                 </div>
               )}
