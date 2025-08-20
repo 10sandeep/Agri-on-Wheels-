@@ -18,7 +18,7 @@ const ProjectImpact: React.FC = () => {
     },
     {
       icon: <MapPin className="w-8 h-8" />,
-      value: "1",
+      value: "2",
       label: "Month Program",
     },
     {
