@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { Menu, X, ChevronDown } from "lucide-react";
-import CUTMLOGO from "../assets/Home Page Assets/cutm_logo.jpeg";
+import CUTMLOGO from "../assets/Home Page Assets/cutm_logo.png";
 import DSLOGO from "../assets/Home Page Assets/DS logo.png";
 
 const proofLinks = [
