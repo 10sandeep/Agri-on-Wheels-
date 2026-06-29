@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, Leaf } from "lucide-react";
-import DSLOGO from "../assets/Home Page Assets/DS logo.png";
-import CUTMSEAL from "../assets/Home Page Assets/cutm-seal.png";
+import DSLOGO from "../assets/Home Page Assets/dassault.png";
+import CUTMSEAL from "../assets/Home Page Assets/centurion.png";
 import HEROBG from "../assets/Proof of work/image16.jpg";
 
 const Hero: React.FC = () => {
@@ -81,10 +81,10 @@ const Hero: React.FC = () => {
               <div className="p-7">
                 <p className="eyebrow text-parchment-200/60">An initiative by</p>
                 <div className="mt-5 flex items-center gap-4">
-                  <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-parchment-50 p-2">
+                  <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-2xl bg-parchment-50 p-2">
                     <img
                       src={CUTMSEAL}
-                      alt="CUTM"
+                      alt="Centurion University"
                       className="logo-crisp h-full w-full object-contain"
                     />
                   </div>
@@ -101,11 +101,11 @@ const Hero: React.FC = () => {
                 <div className="my-6 h-px w-full bg-parchment-50/10" />
 
                 <p className="eyebrow text-parchment-200/60">Supported by</p>
-                <div className="mt-5 flex items-center rounded-2xl bg-parchment-50 px-4 py-3.5">
+                <div className="mt-5 flex items-center justify-center rounded-2xl bg-parchment-50 px-4 py-4">
                   <img
                     src={DSLOGO}
                     alt="La Fondation Dassault Systèmes"
-                    className="logo-crisp h-11 w-auto object-contain"
+                    className="logo-crisp h-14 w-auto object-contain"
                   />
                 </div>
 

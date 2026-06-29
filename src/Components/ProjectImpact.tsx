@@ -7,7 +7,7 @@ interface Metric {
 }
 
 const metrics: Metric[] = [
-  { value: "20", label: "Farmers Trained", detail: "Across Gosani & Gumma blocks" },
+  { value: "117", label: "Farmers Trained", detail: "Across Gosani & Gumma blocks" },
   { value: "2", label: "Districts Covered", detail: "Gajapati & Khordha, Odisha" },
   { value: "150", label: "Spectral Bands", detail: "421.5–977.4 nm VNIR range" },
   { value: "1.39M", label: "Soil Pixels Analysed", detail: "Hyperspectral soil profiling" },

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { Menu, X, ChevronDown } from "lucide-react";
-import CUTMLOGO from "../assets/Home Page Assets/cutm_logo.png";
-import DSLOGO from "../assets/Home Page Assets/DS logo.png";
+import CUTMLOGO from "../assets/Home Page Assets/centurion.png";
+import DSLOGO from "../assets/Home Page Assets/dassault.png";
 
 const proofLinks = [
   { to: "/ProjectProgress/ProofOfWork/FieldVisit", label: "Field Visit" },
@@ -33,16 +33,16 @@ const Navbar: React.FC = () => {
   const closeMenu = () => setIsMenuOpen(false);
 
   const linkBase =
-    "relative text-sm font-medium text-white/80 transition-colors hover:text-white";
-  const activeClass = "text-white";
+    "relative text-sm font-medium text-pine-900/70 transition-colors hover:text-pine-900";
+  const activeClass = "text-pine-900";
 
   return (
     <header className="fixed top-0 z-50 w-full">
       <div
         className={`transition-all duration-300 ${
           scrolled
-            ? "bg-gray-900/95 shadow-[0_1px_0_rgba(0,0,0,0.3)] backdrop-blur-md"
-            : "bg-gray-900/85 backdrop-blur-sm"
+            ? "bg-white shadow-[0_1px_12px_rgba(0,0,0,0.08)] backdrop-blur-md"
+            : "bg-white/95 backdrop-blur-sm"
         }`}
       >
         <div className="container-page flex h-[4.75rem] items-center justify-between">
@@ -53,11 +53,11 @@ const Navbar: React.FC = () => {
               alt="Centurion University of Technology and Management"
               className="logo-crisp h-14 w-auto object-contain sm:h-16"
             />
-            <span className="hidden h-9 w-px bg-white/20 sm:block" />
+            <span className="hidden h-9 w-px bg-pine-900/15 sm:block" />
             <img
               src={DSLOGO}
               alt="La Fondation Dassault Systèmes"
-              className="logo-crisp hidden h-9 w-auto object-contain sm:block brightness-0 invert"
+              className="logo-crisp hidden h-9 w-auto object-contain sm:block"
             />
           </NavLink>
 
@@ -77,7 +77,7 @@ const Navbar: React.FC = () => {
             </NavLink>
 
             <div className="group relative">
-              <button className="flex items-center gap-1.5 text-sm font-medium text-white/80 transition-colors hover:text-white focus-ring rounded">
+              <button className="flex items-center gap-1.5 text-sm font-medium text-pine-900/70 transition-colors hover:text-pine-900 focus-ring rounded">
                 Project Progress
                 <ChevronDown className="h-4 w-4 transition-transform duration-300 group-hover:rotate-180" />
               </button>
@@ -110,7 +110,7 @@ const Navbar: React.FC = () => {
           {/* Mobile toggle */}
           <button
             onClick={() => setIsMenuOpen((v) => !v)}
-            className="inline-flex h-10 w-10 items-center justify-center rounded-full text-white transition-colors hover:bg-white/10 focus-ring md:hidden"
+            className="inline-flex h-10 w-10 items-center justify-center rounded-full text-pine-900 transition-colors hover:bg-pine-900/8 focus-ring md:hidden"
             aria-label={isMenuOpen ? "Close menu" : "Open menu"}
           >
             {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -121,26 +121,26 @@ const Navbar: React.FC = () => {
 
       {/* Mobile menu */}
       {isMenuOpen && (
-        <div className="border-b border-white/10 bg-gray-900 md:hidden">
+        <div className="border-b border-pine-900/10 bg-white md:hidden">
           <div className="container-page space-y-1 py-4">
             <NavLink
               to="/"
               onClick={closeMenu}
-              className="block rounded-xl px-3 py-3 text-base font-medium text-white/85 hover:bg-white/10"
+              className="block rounded-xl px-3 py-3 text-base font-medium text-pine-900/80 hover:bg-pine-50"
             >
               Home
             </NavLink>
             <NavLink
               to="/ProjectDetails"
               onClick={closeMenu}
-              className="block rounded-xl px-3 py-3 text-base font-medium text-white/85 hover:bg-white/10"
+              className="block rounded-xl px-3 py-3 text-base font-medium text-pine-900/80 hover:bg-pine-50"
             >
               Project Details
             </NavLink>
 
             <button
               onClick={() => setProgressOpen((v) => !v)}
-              className="flex w-full items-center justify-between rounded-xl px-3 py-3 text-base font-medium text-white/85 hover:bg-white/10"
+              className="flex w-full items-center justify-between rounded-xl px-3 py-3 text-base font-medium text-pine-900/80 hover:bg-pine-50"
             >
               Project Progress
               <ChevronDown
@@ -149,17 +149,17 @@ const Navbar: React.FC = () => {
             </button>
 
             {progressOpen && (
-              <div className="ml-3 space-y-1 border-l border-white/10 pl-3">
+              <div className="ml-3 space-y-1 border-l border-pine-900/10 pl-3">
                 <NavLink
                   to="/ProjectProgress/Licence"
                   onClick={closeMenu}
-                  className="block rounded-lg px-3 py-2.5 text-sm font-medium text-white/75 hover:bg-white/10"
+                  className="block rounded-lg px-3 py-2.5 text-sm font-medium text-pine-900/70 hover:bg-pine-50"
                 >
                   License &amp; Documents
                 </NavLink>
                 <button
                   onClick={() => setProofOpen((v) => !v)}
-                  className="flex w-full items-center justify-between rounded-lg px-3 py-2.5 text-sm font-medium text-white/75 hover:bg-white/10"
+                  className="flex w-full items-center justify-between rounded-lg px-3 py-2.5 text-sm font-medium text-pine-900/70 hover:bg-pine-50"
                 >
                   Proof of Work
                   <ChevronDown
@@ -167,13 +167,13 @@ const Navbar: React.FC = () => {
                   />
                 </button>
                 {proofOpen && (
-                  <div className="ml-3 space-y-1 border-l border-white/10 pl-3">
+                  <div className="ml-3 space-y-1 border-l border-pine-900/10 pl-3">
                     {proofLinks.map((l) => (
                       <NavLink
                         key={l.to}
                         to={l.to}
                         onClick={closeMenu}
-                        className="block rounded-lg px-3 py-2.5 text-sm font-medium text-white/70 hover:bg-white/10"
+                        className="block rounded-lg px-3 py-2.5 text-sm font-medium text-pine-900/60 hover:bg-pine-50"
                       >
                         {l.label}
                       </NavLink>
