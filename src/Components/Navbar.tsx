@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { Menu, X, ChevronDown } from "lucide-react";
-import CUTMLOGO from "../assets/Home Page Assets/cutm-seal.png";
+import CUTMLOGO from "../assets/Home Page Assets/cutm_logo.jpeg";
 import DSLOGO from "../assets/Home Page Assets/DS logo.png";
 
 const proofLinks = [
@@ -51,7 +51,7 @@ const Navbar: React.FC = () => {
             <img
               src={CUTMLOGO}
               alt="Centurion University of Technology and Management"
-              className="logo-crisp h-12 w-12 object-contain sm:h-[3.25rem] sm:w-[3.25rem]"
+              className="logo-crisp h-14 w-auto object-contain sm:h-16"
             />
             <span className="hidden h-9 w-px bg-pine-900/15 sm:block" />
             <img
