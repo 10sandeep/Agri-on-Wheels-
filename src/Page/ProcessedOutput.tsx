@@ -22,7 +22,6 @@ import GNDVI from "../assets/Processed Output/gndvi.jpg";
 import NDVI from "../assets/Processed Output/ndvi.jpg";
 import EVI from "../assets/Processed Output/evi.jpg";
 import DATT from "../assets/Processed Output/datt.jpg";
-import BSI from "../assets/Processed Output/bsi.jpg";
 import SOIL_HSI from "../assets/Hyperspectral/Soil_Analytics_HSI_Report.pdf";
 import CAMPUS_HSI from "../assets/Hyperspectral/University_Campus_CUTM_BBSR_HSI_Report.pdf";
 
