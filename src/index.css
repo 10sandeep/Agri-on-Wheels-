@@ -1,0 +1,101 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* VNIR spectral gradient — blue(421) → green → red(660) → NIR(977) */
+    --spectral-band: linear-gradient(
+      90deg,
+      #2b3a8f 0%,
+      #1b7a6e 26%,
+      #4a8a58 44%,
+      #cf9420 64%,
+      #b5572e 82%,
+      #7a1f1f 100%
+    );
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-parchment text-ink font-sans antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background-color: #163f26;
+    color: #f8eccb;
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-display;
+    letter-spacing: -0.01em;
+  }
+
+  /* Crisp logo rendering at any size */
+  img.logo-crisp {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  /* Signature element: the VNIR spectral band, used as a divider/accent */
+  .spectral-band {
+    background: var(--spectral-band);
+  }
+
+  .eyebrow {
+    @apply font-mono text-[0.7rem] sm:text-xs font-medium uppercase tracking-[0.28em];
+  }
+
+  .focus-ring {
+    @apply outline-none focus-visible:ring-2 focus-visible:ring-harvest-400 focus-visible:ring-offset-2 focus-visible:ring-offset-parchment;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-pine-800 px-6 py-3 text-sm font-semibold text-parchment-50 transition-all duration-300 hover:bg-pine-700 hover:shadow-lift focus-ring;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-pine-800/20 bg-transparent px-6 py-3 text-sm font-semibold text-pine-800 transition-all duration-300 hover:border-pine-800/50 hover:bg-pine-800/[0.04] focus-ring;
+  }
+
+  .card-surface {
+    @apply rounded-2xl border border-pine-900/[0.08] bg-white shadow-card;
+  }
+
+  .container-page {
+    @apply mx-auto w-full max-w-content px-5 sm:px-8 lg:px-10;
+  }
+}
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+  .text-balance { text-wrap: balance; }
+
+  /* subtle grain / paper texture using layered radial gradients */
+  .paper-grain {
+    background-image:
+      radial-gradient(circle at 20% 30%, rgba(15,46,29,0.025) 0, transparent 40%),
+      radial-gradient(circle at 80% 70%, rgba(176,116,26,0.03) 0, transparent 45%);
+  }
+}
