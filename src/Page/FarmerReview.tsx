@@ -49,7 +49,7 @@ export default function FarmerReview() {
 
   const farmersPerPage = 9;
   const totalPages = Math.max(1, Math.ceil(filteredFarmers.length / farmersPerPage));
-  const blocks = ["all", ...Array.from(new Set(farmers.map((f) => f.block)))];
+  const blocks = ["all", ...Array.from(new Set(farmers.map((f) => f.block))).filter((b) => b !== "ARVR")];
 
   useEffect(() => {
     const results = farmers.filter((farmer) => {
