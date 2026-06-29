@@ -5,7 +5,7 @@ import { Banknote, Fingerprint, FileSignature, Target } from "lucide-react";
 const facts = [
   { icon: Fingerprint, label: "DSF Project ID", value: "IN-2024-2-08" },
   { icon: FileSignature, label: "DSF Agreement ID", value: "2025-289" },
-  { icon: Banknote, label: "Funding Released · FY 24–25", value: "₹ 11,50,000" },
+  { icon: Banknote, label: "Funding Released · FY 24–25", value: "₹ 15,00,000" },
 ];
 
 const ProjectDetails: React.FC = () => {
